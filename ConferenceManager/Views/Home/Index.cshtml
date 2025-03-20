@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Начало";
+}
+
+<div class="container text-center mt-5">
+    <h1>Добре дошли в Conference Manager!</h1>
+    <p class="lead">Управлявайте и участвайте в технологични събития лесно.</p>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a href="@Url.Action("Index", "Event")" class="btn btn-primary">Разгледай събития</a>
+    }
+    else
+    {
+        <a href="@Url.Action("Login", "Account")" class="btn btn-success">Вход</a>
+        <a href="@Url.Action("Register", "Account")" class="btn btn-info">Регистрация</a>
+    }
+</div>

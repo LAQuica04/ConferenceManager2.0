@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Административен панел";
+}
+
+<h2>Административен панел</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h5 class="card-title">Общо потребители</h5>
+                <p class="card-text display-4">@ViewBag.TotalUsers</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h5 class="card-title">Общо събития</h5>
+                <p class="card-text display-4">@ViewBag.TotalEvents</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3 class="mt-4">Последни регистрации</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Име</th>
+            <th>Имейл</th>
+            <th>Роля</th>
+            <th>Действие</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in ViewBag.RecentUsers)
+        {
+            <tr>
+                <td>@user.FullName</td>
+                <td>@user.Email</td>
+                <td>@user.Role</td>
+                <td>
+                    <a href="@Url.Action("EditUser", "Admin", new { id = user.Id })" class="btn btn-warning btn-sm">Редакция</a>
+                    <a href="@Url.Action("DeleteUser", "Admin", new { id = user.Id })" class="btn btn-danger btn-sm">Изтриване</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

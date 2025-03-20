@@ -1,0 +1,32 @@
+﻿@model List<Registration>
+
+<h2>Чакащи регистрации</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Потребител</th>
+            <th>Събитие</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reg in Model)
+        {
+            <tr>
+                <td>@reg.User.UserName</td>
+                <td>@reg.Event.Title</td>
+                <td>
+                    <form method="post" asp-action="ApproveRegistration">
+                        <input type="hidden" name="registrationId" value="@reg.Id" />
+                        <button type="submit" class="btn btn-success">Одобри</button>
+                    </form>
+                    <form method="post" asp-action="RejectRegistration">
+                        <input type="hidden" name="registrationId" value="@reg.Id" />
+                        <button type="submit" class="btn btn-danger">Откажи</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

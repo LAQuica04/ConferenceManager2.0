@@ -1,0 +1,25 @@
+﻿@model Event
+
+@{
+    ViewData["Title"] = "Детайли за събитие";
+}
+
+<h2>@Model.Title</h2>
+
+<p><strong>Описание:</strong> @Model.Description</p>
+<p><strong>Дата:</strong> @Model.Date.ToString("dd.MM.yyyy")</p>
+<p><strong>Място:</strong> @Model.Location</p>
+<p><strong>Лектор:</strong> @Model.Speaker?.FullName</p>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <form method="post" action="@Url.Action("RegisterForEvent", "Event")">
+        <input type="hidden" name="eventId" value="@Model.Id" />
+        <button type="submit" class="btn btn-success">Записване</button>
+    </form>
+
+    <form method="post" action="@Url.Action("CancelRegistration", "Event")" class="mt-2">
+        <input type="hidden" name="eventId" value="@Model.Id" />
+        <button type="submit" class="btn btn-danger">Отказване</button>
+    </form>
+}
